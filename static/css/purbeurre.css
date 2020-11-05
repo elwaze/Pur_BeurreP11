@@ -1,0 +1,49 @@
+/* my css */
+.page-top {
+    /*background-color:*/
+}
+
+/* badges for nutriscores on products pictures */
+.uppercase {
+    text-transform: uppercase;
+}
+
+.nutribadge {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    right: 4rem;
+    top: -1rem;
+    line-height: 2rem;
+    border-radius: 50%;
+}
+
+.a-nutriscore {
+    background-color: #5aa242;
+}
+.b-nutriscore {
+    background-color: #9fe022;
+}
+.c-nutriscore {
+    background-color: #f7a818;
+}
+.d-nutriscore {
+    background-color: #ff9700;
+}
+.e-nutriscore {
+    background-color: #ff0000;
+}
+
+
+.product-picture {
+    max-width: 256px;
+    max-height: 256px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: "Open Sans", sans-serif !important;
+}
+
+body {
+font-family: "Scope One", sans-serif !important;
+}

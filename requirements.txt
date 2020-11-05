@@ -1,0 +1,9 @@
+django
+psycopg2
+dj_database_url
+requests
+coverage
+selenium
+webdriver-manager
+django-selenium-login
+gunicorn

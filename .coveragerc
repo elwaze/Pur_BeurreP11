@@ -1,0 +1,33 @@
+[run]
+omit =
+    # omit anything in a .local directory anywhere
+    */venv/*
+    */migrations/*
+    */urls.py
+    */settings.py
+    */test_settings.py
+    */__init__.py
+    # omit everything in /usr
+    ./tests/*
+    # omit this single file
+    manage.py
+
+[report]
+# Regexes for lines to exclude from consideration
+exclude_lines =
+    # Have to re-enable the standard pragma
+    pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __repr__
+    if self\.debug
+
+    # Don't complain if non-runnable code isn't run:
+    if __name__ == .__main__.:
+
+
+[html]
+directory = coverage_html_report
+
+[paths]
+source = .

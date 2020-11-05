@@ -1,0 +1,35 @@
+[
+    {
+        "name": "Aliments et boissons à base de végétaux",
+        "products": [
+            {
+                "link": "https://fr.openfoodfacts.org/produit/26018058/pain-de-mie-mannapain",
+                "name": "Pain De mie",
+                "nutriscore": "c",
+                "img": "https://static.openfoodfacts.org/images/products/26018058/front_fr.27.400.jpg",
+                "nutrition_img": "https://static.openfoodfacts.org/images/products/26018058/nutrition_fr.12.200.jpg"
+            },
+            {
+                "link": "https://fr.openfoodfacts.org/produit/27096208/pain-suedois-mannapain",
+                "name": "Pain Suédois",
+                "nutriscore": "b",
+                "img": "https://static.openfoodfacts.org/images/products/27096208/front_fr.4.400.jpg",
+                "nutrition_img": "https://static.openfoodfacts.org/images/products/27096208/nutrition_fr.18.200.jpg"
+            },
+            {
+                "link": "https://fr.openfoodfacts.org/produit/3596710427321/pain-de-mie-aux-cereales-et-graines-auchan",
+                "name": "Pain de mie aux céréales et graines",
+                "nutriscore": "b",
+                "img": "https://static.openfoodfacts.org/images/products/359/671/042/7321/front_fr.20.400.jpg",
+                "nutrition_img": "https://static.openfoodfacts.org/images/products/359/671/042/7321/nutrition_fr.16.200.jpg"
+            },
+            {
+                "link": "https://fr.openfoodfacts.org/produit/3029330071273/pain-de-mie-jacquet",
+                "name": "Pain de mie",
+                "nutriscore": "a",
+                "img": "https://static.openfoodfacts.org/images/products/302/933/007/1273/front_fr.3.400.jpg",
+                "nutrition_img": "https://static.openfoodfacts.org/images/products/302/933/007/1273/nutrition_fr.5.200.jpg"
+            }
+        ]
+    }
+]
