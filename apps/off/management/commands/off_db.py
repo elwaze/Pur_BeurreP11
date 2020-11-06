@@ -112,7 +112,7 @@ class Command(BaseCommand):
         nb_prod = 0
         while (pages_count < (needed_pages + 1)) and (nb_prod < self.product_count):
             # we request pages one by one, and we limit number of products for Heroku DB size
-            request_products = requests.get('{url}/{str(pages_count)}.json')
+            request_products = requests.get(f'{url}/{str(pages_count)}.json')
             pages_count += 1
             products_json = request_products.json()
             products = products_json.get('products')
