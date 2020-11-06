@@ -13,7 +13,7 @@ class FavoriteManager(models.Manager):
         """
 
         self.get_or_create(
-            favorite_ids=product,
+            favorite_id=product,
             user_id=user.id
         )
 
@@ -26,7 +26,7 @@ class FavoriteManager(models.Manager):
         """
 
         favorite = self.get(
-            favorite_ids=product,
+            favorite_id=product,
             user_id=user.id
         )
         favorite.delete()
