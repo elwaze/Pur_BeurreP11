@@ -27,7 +27,7 @@ class ProductManager(models.Manager):
                     product_found = products_found.first()
                 substitutes = products_found.filter(
                     category=product_found.category,
-                    nutriscore=product_found.nutriscore
+                    nutriscore__lt=product_found.nutriscore
                 )
         return substitutes, product_found
 
