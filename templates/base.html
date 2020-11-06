@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Eloïse Lamontagne">
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/logo_pur_beurre-favicon.png' %}" />
+
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet" type="text/css">
+
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+
+
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="{% static 'css/start-bootstrap-creative.css' %}">
+    <!-- Pur beurre CSS -->
+    <link rel="stylesheet" href="{% static 'css/purbeurre.css' %}">
+
+</head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="{% url 'homepage' %}">
+                    <img src="{% static 'img/logo_pur_beurre.png' %}" alt="logo" id="logo" width="50px">
+                    Pur Beurre
+                </a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+                        <li class="nav-item">
+                             <form class="form-inline" method="GET" action="{% url 'results' %}" >
+                                <input class="form-control search" name="query" placeholder="Chercher" aria-label="Chercher">
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}
+                            <a class="nav-link js-scroll-trigger" href="{% url 'my_account' %}">
+                                <i class="far fa-user fa-3x"></i>
+                            </a>
+                            {% else %}
+                            <a class="nav-link js-scroll-trigger" href="{% url 'connection' %}">
+                                <i class="fas fa-sign-in-alt fa-3x"></i>
+                            </a>
+                            {% endif %}
+                        </li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="{% url 'favorites' %}">
+                                <img src="{% static 'img/logo-favorites.png' %}" alt="Mes aliments" id="favorites" width="29px">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="{% url 'disconnection' %}">
+                                <i class="fas fa-sign-out-alt fa-3x"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% block content %}{% endblock %}
+
+        <!-- Footer-->
+        <footer class="bg-light py-5 footer">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <a href="{% url 'legal' %}"> Mentions légales </a>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <a href="{% url 'homepage' %}#contact"> Contact </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="{% static 'js/scripts.js' %}"></script>
+    </body>
+</html>

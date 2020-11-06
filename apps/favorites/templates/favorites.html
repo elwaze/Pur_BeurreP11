@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Favoris{% endblock %}
+
+{% block content %}
+
+<section class="page-section bg-primary" id="head-section">
+    <div class="col-lg-12 text-center text-white">
+        <h1 class="text-uppercase">Mes aliments sauvegardés</h1>
+    </div>
+</section>
+<section class="page-section bg-secondary" id="favorites">
+    <div class="container">
+        <div class="row">
+            {% for product in favorites_saved %}
+            <div class="col-lg-4 text-center">
+                <div class="img-container">
+                    <!-- shows the favorites with button to delete.-->
+                    <a href="{% url 'detail' product.id %}">
+                        <span class="nutribadge {{ product.nutriscore }}-nutriscore text-white uppercase">{{ product.nutriscore }}</span>
+                        <img class="product-picture" src="{{ product.img }}" alt="{{ product.name }}">
+                        <p class="product-name">{{ product.name }}</p>
+                        <form class="delete" method="POST" action="{% url 'remove' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="product" value="{{ product.id }}">
+                            <input id="remove_favorite" type="submit" class="btn btn-danger" value="Supprimer" />
+                        </form>
+                    </a>
+                </div>
+                <br>
+            </div>
+            {% empty %}
+            <div class="col-lg-12 text-center text-white">
+                <h2>Vous n'avez pas encore d'aliments sauvegardés dans vos favoris</h2>
+                <p>Après avoir effectué une recherche d'aliments de substitution, vous pouvez sauvegarder les réponses qui vous intéressent et les retrouver sur cette page.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

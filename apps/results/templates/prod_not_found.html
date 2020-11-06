@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Aucun produit trouvé pour {{ query }}{% endblock %}
+
+{% block content %}
+<section class="page-section bg-primary" id="head-section">
+    <div class="col-lg-12 text-center text-white">
+        <h1 class="text-uppercase">Nous n'avons pas trouvé de produit correspondant à {{ query }}.</h1>
+        <h3>Vous pouvez effectuer une nouvelle recherche.</h3>
+    </div>
+</section>
+{% endblock %}

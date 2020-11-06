@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container h-100 col-lg-12" >
+        <div class="row h-100 align-items-center justify-content-center text-center bg-secondary">
+            <div class="col-lg-10 align-self-end" style="padding-top: 10rem;">
+              <h1 class="text-uppercase font-weight-bold">Se connecter</h1>
+              <hr class="divider my-4">
+            </div>
+            <div class="col-lg-8 text-left text-50 mb-4" style=" padding-bottom: 10rem;">
+                {% if error %}
+                <p><strong>Utilisateur inconnu ou mauvais de mot de passe.</strong></p>
+                {% endif %}
+                {% if user.is_authenticated %}
+                Vous êtes connecté(e), {{ user.first_name }} !
+                {% else %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Se connecter" />
+                </form>
+                {% endif %}
+                <hr class="divider my-4">
+                <div class="col-lg-12 align-self-end">
+                    <form action="{% url 'create_account' %}">
+                    <button type="submit" class="btn btn-success">Créer un compte</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

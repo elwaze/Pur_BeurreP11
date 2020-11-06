@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Créer un compte{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container h-100 col-lg-12" >
+        <div class="row h-100 align-items-center justify-content-center text-center bg-secondary">
+            <div class="col-lg-10 align-self-end" style="padding-top: 10rem;">
+              <h1 class="text-uppercase font-weight-bold">Créer un compte</h1>
+              <hr class="divider my-4">
+            </div>
+            <div class="col-lg-8 text-left text-50 mb-4" style=" padding-bottom: 10rem;">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Créer mon compte" />
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+
+<section>
+    <div class="container h-100 col-lg-12" >
+        <div class="row h-100 align-items-center justify-content-center text-center bg-secondary">
+          <div class="col-lg-10 align-self-end" style="padding-top: 10rem;">
+            <h1 class="text-uppercase font-weight-bold">Mentions légales</h1>
+            <hr class="divider my-4">
+          </div>
+          <div class="col-lg-8 text-left text-50 mb-4" style=" padding-bottom: 10rem;">
+              <p>Site réalisé par
+                  <a href="https://github.com/elwaze" title="GitHub">Eloïse Lamontagne</a>
+                  pour <a href="https://company-82435.frontify.com/d/6Yy9WFJdtp8j/pur-beurre-style-guide" title="PurBeurre">
+                      <strong>Pur Beurre</strong>
+                  </a>
+                  <br>
+              </p>
+              <p>Données et images produits :
+                  <a href="https://fr.openfoodfacts.org/" title="OpenFoodFacts">OpenFoodFacts</a>
+                  <br>
+              </p>
+              <p>Template Bootstrap :
+                  <a href="https://startbootstrap.com/themes/creative/" title="Bootstrap">Start Bootstrap Creative</a>
+                  <br>
+              </p>
+              <p> Site hébergé par
+                  <a href="http://heroku.com" title="Heroku">Heroku</a>
+                  <br>
+              </p>
+              <p> Image de fond : photo by Olenka Kotyk,
+                  <a href="https://unsplash.com/photos/eqsEZNCm4-c" title="Unsplash">Unsplash</a>
+                  <br>
+              </p>
+              <p> Icone carotte : Carrot by Fabien Jouin from
+                  <a href="https://thenounproject.com/term/carrot/29691/" title="The Noun Project">The Noun Project</a>
+                  <br>
+              </p>
+               <p> Autres icones :
+                  <a href="https://fontawesome.com/icons?from=io" title="Font Awesome">Font Awesome</a>
+                  <br>
+              </p>
+          </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

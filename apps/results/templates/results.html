@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}Résultats{% endblock %}
+
+{% block content %}
+    <section class="page-section bg-secondary" id="results">
+            {% include 'detailed_item.html' with product=product %}
+
+        <div class="col-lg-12 text-center text-white">
+            <br>
+            <h2>Vous pouvez remplacer cet aliment par : </h2>
+            <br>
+        </div>
+        <div class="container">
+            <div class="row">
+                {% for product in substitutes %}
+                    <div class="col-lg-4 text-center">
+                        <div class="img-container">
+                            <a href="{% url 'detail' product.id %}">
+                                <span class="nutribadge {{ product.nutriscore }}-nutriscore text-white uppercase">{{ product.nutriscore }}</span>
+                                <img class="product-picture" src="{{ product.img }}" alt="{{ product.name }}">
+                                <p class="product-name">{{ product.name }}</p>
+                            </a>
+                                {% if user.is_authenticated %}
+                                <div class="row justify-content-center">
+                                    <i class="fa fa-save fa-2x" aria-hidden="true" style="margin-right:10px; color:#86EBE6;"></i>
+                                    <form class="save" method="GET" action="{% url 'save' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="product" value="{{ product.id }}">
+                                        <input id="save_product" type="submit" class="btn btn-primary" name="prod" value="Sauvegarder" />
+                                    </form>
+                                </div>
+                                {% endif %}
+                        </div>
+                        <br>
+                    </div>
+                    {% empty %}
+                    <div class="col-lg-12 text-center text-white">
+                        <h2>Nous n'avons pas trouvé de substitut à l'aliment recherché.</h2>
+                        <p>Vous pouvez tenter une nouvelle recherche.</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
