@@ -38,7 +38,6 @@ class TestProduct(TestCase):
         """
 
         substitutes, product_found = Product.objects.search("name")
-        print(substitutes, product_found)
         # the test found a product
         self.assertEqual("name", product_found.name)
         self.assertEqual("http://url.com", product_found.link)
@@ -47,7 +46,6 @@ class TestProduct(TestCase):
         self.assertEqual("http://img.com", product_found.img)
         self.assertEqual("", product_found.nutrition_img)
         if substitutes:
-            # trier les substitutes
             assertion = product_found.nutriscore > substitutes[0].nutriscore
             # the product is not listed in substitutes
             self.assertNotIn(product_found, substitutes)
