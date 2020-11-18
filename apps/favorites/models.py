@@ -1,6 +1,7 @@
 from django.db import models
 from apps.off.models import Product
-from apps.user.models import PBUser as User
+# from apps.user.models import PBUser as User
+from django.contrib.auth.models import User
 
 
 class FavoriteManager(models.Manager):

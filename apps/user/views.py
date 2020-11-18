@@ -1,7 +1,15 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-from apps.user.models import PBUser as User
+# from apps.user.models import PBUser as User
+from django.contrib.auth.models import User
 from .forms import ConnectionForm, AccountForm
+from .tokens import account_activation_token
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_text
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 
 
 def connection(request):
@@ -66,10 +74,29 @@ def create_account(request):
             user = User.objects.create_user(username, username, password)
             user.first_name = first_name
             user.active = False
-            try:
-                user.save()
-            except Exception:
-                return render() # error ?? error = True ?
+            # sending confirmation email
+            subject = 'Finalisez la création de votre compte Pur Beurre'
+            context = {
+                'user': user,
+                'domain': settings.SITE_LINK,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': account_activation_token.make_token(user)
+                # 'link': settings.SITE_LINK
+                }
+            email_content = render_to_string('confirmation_email.html', context)
+            to_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                subject, email_content, to=[to_email]
+            )
+            email.send()
+            return HttpResponse(
+                'Veuillez confirmer votre adresse email pour valider la création de votre compte Pur Beurre')
+            # sendConfirm(user)
+
+            # try:
+            #     user.save()
+            # except Exception:
+            #     return render() # error ?? error = True ?
             # sending confirmation email
             # sendConfirm(user)
             # if user:
@@ -85,16 +112,31 @@ def create_account(request):
     return render(request, 'create_account.html', locals())
 
 
-def user_confirmation(request):
-    token = request.GET.get('token')
-    if not token:
-        # error renv une p html disant qu'une erreur s'est produite, qu'il faut recommencer ? lien vers create account
-        return
-    users = User.objects.filter(token=token, active=False)
-    if not users:
-        # error renv une p html disant que la confirmation n'a pas pu avoir lieu, qu'il faut recommencer ?
-        return render()
-    for user in users:
-        user.active = True
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
         user.save()
-    return redirect('connection')
+        login(request, user)
+        # return redirect('home')
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')
+
+# def user_confirmation(request):
+#     token = request.GET.get('token')
+#     if not token:
+#         # error renv une p html disant qu'une erreur s'est produite, qu'il faut recommencer ? lien vers create account
+#         return
+#     users = User.objects.filter(token=token, active=False)
+#     if not users:
+#         # error renv une p html disant que la confirmation n'a pas pu avoir lieu, qu'il faut recommencer ?
+#         return render()
+#     for user in users:
+#         user.active = True
+#         user.save()
+#     return redirect('connection')
