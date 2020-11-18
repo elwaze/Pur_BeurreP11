@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from apps.user.models import PBUser as User
 from django.test import TestCase, Client
 from django.urls import reverse
 

@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from apps.user.models import PBUser as User
 from django.test import TestCase
 
 from apps.off.models import Category

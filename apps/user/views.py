@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from apps.user.models import PBUser as User
 from .forms import ConnectionForm, AccountForm
 
 
@@ -65,15 +65,36 @@ def create_account(request):
             # Creating user
             user = User.objects.create_user(username, username, password)
             user.first_name = first_name
-            user.save()
-            if user:
-                # Connecting user and redirecting to the user's account page.
-                login(request, user)
-                return redirect('my_account')
-            # prompts an error
-            else:
-                error = True
+            user.active = False
+            try:
+                user.save()
+            except Exception:
+                return render() # error ?? error = True ?
+            # sending confirmation email
+            # sendConfirm(user)
+            # if user:
+            #     # Connecting user and redirecting to the user's account page.
+            #     login(request, user)
+            #     return redirect('my_account')
+            # # prompts an error
+            # else:
+            #     error = True
     else:
         form = AccountForm()
 
     return render(request, 'create_account.html', locals())
+
+
+def user_confirmation(request):
+    token = request.GET.get('token')
+    if not token:
+        # error renv une p html disant qu'une erreur s'est produite, qu'il faut recommencer ? lien vers create account
+        return
+    users = User.objects.filter(token=token, active=False)
+    if not users:
+        # error renv une p html disant que la confirmation n'a pas pu avoir lieu, qu'il faut recommencer ?
+        return render()
+    for user in users:
+        user.active = True
+        user.save()
+    return redirect('connection')
