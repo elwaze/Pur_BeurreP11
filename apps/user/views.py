@@ -84,7 +84,7 @@ def create_account(request):
                 # 'link': settings.SITE_LINK
                 }
             email_content = render_to_string('confirmation_email.html', context)
-            to_email = form.cleaned_data.get('email')
+            to_email = form.cleaned_data.get("username")
             email = EmailMessage(
                 subject, email_content, to=[to_email]
             )
@@ -106,6 +106,8 @@ def create_account(request):
             # # prompts an error
             # else:
             #     error = True
+        else:
+            print("error")
     else:
         form = AccountForm()
 

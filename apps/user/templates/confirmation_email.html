@@ -7,6 +7,6 @@
 <body>
     <h1>Bonjour {{user.first_name}} !</h1><br>
     <p>Pour confirmer la création de votre compte Pur Beurre, veuillez cliquer sur le lien suivant : </p><br>
-    <p><a href="{{ domain }}/{% url 'activate' uidb64=uid token=token %">Je confirme mon inscription</a></p>
+    <p><a href="{{ domain }}{% url 'activate' uidb64=uid token=token %}">Je confirme mon inscription</a></p>
 </body>
 </html>

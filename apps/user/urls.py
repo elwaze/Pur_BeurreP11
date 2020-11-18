@@ -1,4 +1,5 @@
 from django.urls import re_path
+# from django.conf.urls import url
 from . import views
 
 urlpatterns = [
@@ -8,5 +9,5 @@ urlpatterns = [
     re_path(r'^my_account$', views.my_account, name='my_account'),
     # re_path(r'^user_confirmation$', views.user_confirmation, name='user_confirmation'),
     re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        views.activate, name='activate'),
+            views.activate, name='activate'),
 ]
