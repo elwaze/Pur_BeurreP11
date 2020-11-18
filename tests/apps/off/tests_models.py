@@ -31,6 +31,27 @@ class TestProduct(TestCase):
         self.assertEqual("http://img.com", product.img)
         self.assertEqual("", product.nutrition_img)
 
+    def test_search(self):
+        """
+        Checks that the ProductManager search function
+        returns a product and substitutes with lower nutriscores
+        """
+
+        substitutes, product_found = Product.objects.search("name")
+        # the test found a product
+        self.assertEqual("name", product_found.name)
+        self.assertEqual("http://url.com", product_found.link)
+        self.assertEqual("a", product_found.nutriscore)
+        self.assertEqual(self.category, product_found.category)
+        self.assertEqual("http://img.com", product_found.img)
+        self.assertEqual("", product_found.nutrition_img)
+        if substitutes:
+            assertion = product_found.nutriscore > substitutes[0].nutriscore
+            # the product is not listed in substitutes
+            self.assertNotIn(product_found, substitutes)
+            # the product's nutriscore is upper than the higher substitute's nutriscore
+            self.assertTrue(assertion)
+
 
 class TestCategory(TestCase):
     """
