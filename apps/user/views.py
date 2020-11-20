@@ -80,6 +80,7 @@ def create_account(request):
                 'user': user,
                 'domain': settings.SITE_LINK,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                # 'uid': force_text(urlsafe_base64_encode(force_bytes(user.pk))),
                 'token': account_activation_token.make_token(user)
                 # 'link': settings.SITE_LINK
                 }
@@ -124,10 +125,11 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        # return redirect('my_account')
+        return HttpResponse(
+            'L\'activation de votre compte Pur Beurre a été réalisée. vous pouvez maintenant vous connecter.')
     else:
-        return HttpResponse('Activation link is invalid!')
+        return HttpResponse('Le lien d\'activation est invalide, veuillez réessayer !')
 
 # def user_confirmation(request):
 #     token = request.GET.get('token')
