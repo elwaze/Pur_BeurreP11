@@ -84,6 +84,7 @@ def create_account(request):
                 'token': account_activation_token.make_token(user)
                 # 'link': settings.SITE_LINK
                 }
+            print(context['uid'], context['token'])
             email_content = render_to_string('confirmation_email.html', context)
             to_email = form.cleaned_data.get("username")
             email = EmailMessage(

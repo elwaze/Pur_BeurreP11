@@ -53,12 +53,17 @@ class AccountTestCase(GeneralTestCase):
 
         # submitting the form
         submit.click()
+        # # check the returned result
+        # self.assertEqual(
+        #     self.selenium.current_url,
+        #     '{}/user/my_account'.format(self.live_server_url),
+        #     "urlfound: " + self.selenium.current_url
+        # )
         # check the returned result
-        self.assertEqual(
-            self.selenium.current_url,
-            '{}/user/my_account'.format(self.live_server_url),
-            "urlfound: " + self.selenium.current_url
-        )
+        self.assertIn(
+            'Veuillez confirmer votre adresse email pour valider la création de votre compte Pur Beurre',
+            self.selenium.page_source)
+        # check the e-mail have been sent
 
         # logout at the end of the test, not to be logged in for next test
         logout = self.selenium.find_element_by_xpath('//a[@href="/user/disconnection"]')
