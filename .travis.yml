@@ -4,6 +4,8 @@ python:
 
 before_script:
   - pip install -r requirements.txt
+  - pip install mailcatcher
+  - smtp://127.0.0.1:1025
   - coverage erase
 
 env: DJANGO_SETTINGS_MODULE="pur_beurre.settings.test_settings"
