@@ -55,3 +55,8 @@ class TestUserViews(TestCase):
         response = self.client.post(reverse('create_account'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(template_name='purbeurre_user/create_account.html')
+
+    def test_activate(self):
+        """
+
+        """

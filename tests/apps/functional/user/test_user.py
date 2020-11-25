@@ -65,7 +65,10 @@ class AccountTestCase(GeneralTestCase):
             self.selenium.page_source)
         # check the e-mail have been sent
 
+        # check that the activation link works
+
         # logout at the end of the test, not to be logged in for next test
+
         logout = self.selenium.find_element_by_xpath('//a[@href="/user/disconnection"]')
         logout.click()
 

@@ -109,6 +109,7 @@ def create_account(request):
             # else:
             #     error = True
         else:
+            error = True
             print("error")
     else:
         form = AccountForm()
