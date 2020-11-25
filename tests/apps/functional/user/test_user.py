@@ -60,6 +60,7 @@ class AccountTestCase(GeneralTestCase):
             self.selenium.page_source)
         # check the e-mail have been sent
         self.selenium.get('http://127.0.0.1:1080/')
+        print('in emailpage')
         self.assertIn('Pour confirmer la création de votre compte Pur Beurre, veuillez cliquer sur le lien suivant :',
                       self.selenium.page_source)
         # check that the activation link works
