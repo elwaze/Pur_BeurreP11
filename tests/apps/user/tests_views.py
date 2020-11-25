@@ -69,7 +69,7 @@ class TestUserViews(TestCase):
         after that, the user should be activated.
         """
         self.user.is_active = False
-        response = self.client.get(reverse('activate'), args=[self.uid, self.token])
+        response = self.client.get(reverse('activate', kwargs={'uidb64': self.uid, 'token': self.token}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(self.user.is_active, True)
         self.assertTemplateUsed(template_name='purbeurre_user/my_account.html')
