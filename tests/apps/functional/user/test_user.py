@@ -73,6 +73,7 @@ class AccountTestCase(GeneralTestCase):
             "urlfound: " + self.selenium.current_url
         )
         # logout at the end of the test, not to be logged in for next test
+
         logout = self.selenium.find_element_by_xpath('//a[@href="/user/disconnection"]')
         logout.click()
 

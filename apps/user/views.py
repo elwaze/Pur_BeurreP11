@@ -51,7 +51,6 @@ def disconnection(request):
     """
 
     logout(request)
-    print(request)
     return render(request, 'home.html', locals())
 
 
