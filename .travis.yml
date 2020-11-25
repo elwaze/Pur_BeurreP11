@@ -4,7 +4,7 @@ python:
 
 before_script:
   - pip install -r requirements.txt
-  - pip install mailcatcher
+  - gem install mailcatcher
   - mailcatcher
   - coverage erase
 
