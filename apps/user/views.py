@@ -74,6 +74,7 @@ def create_account(request):
             user = User.objects.create_user(username, username, password)
             user.first_name = first_name
             user.is_active = False
+            user.save()
             # sending confirmation email
             subject = 'Finalisez la création de votre compte Pur Beurre'
             context = {
