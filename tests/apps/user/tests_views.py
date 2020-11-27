@@ -1,5 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
+from apps.user.tokens import account_activation_token
+
 # from apps.user.models import PBUser as User
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
@@ -14,11 +16,9 @@ class TestUserViews(TestCase):
     def setUp(self):
         self.username = 'moi@gmail.com'
         self.password = 'moi'
-        self.token = 'adw06n-f65b4b34cfdf69a23a70fecd212b3d63'
+        self.token = account_activation_token.make_token(self.user)
         self.client = Client()
         self.user = User.objects.create_user(username=self.username, password=self.password)
-        self.user.token = self.token
-        self.user.save()
         self.uid = urlsafe_base64_encode(force_bytes(self.user.pk))
 
     def test_user_connection_page(self):
