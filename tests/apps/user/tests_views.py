@@ -16,9 +16,9 @@ class TestUserViews(TestCase):
     def setUp(self):
         self.username = 'moi@gmail.com'
         self.password = 'moi'
-        self.token = account_activation_token.make_token(self.user)
         self.client = Client()
         self.user = User.objects.create_user(username=self.username, password=self.password)
+        self.token = account_activation_token.make_token(self.user)
         self.uid = urlsafe_base64_encode(force_bytes(self.user.pk))
 
     def test_user_connection_page(self):
