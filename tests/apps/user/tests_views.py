@@ -21,6 +21,7 @@ class TestUserViews(TestCase):
         self.client = Client()
         self.user = User.objects.create_user(username=self.username, password=self.password)
         self.user.firstname = self.firstname
+        self.user.is_active = True
         self.user.save()
         self.token = account_activation_token.make_token(self.user)
         self.uid = urlsafe_base64_encode(force_bytes(self.user.pk))
@@ -78,7 +79,6 @@ class TestUserViews(TestCase):
         user.save()
         print("user.is_active 1")
         print(user.is_active)
-        time.sleep(3)
         response = self.client.get(reverse('activate', kwargs={'uidb64': self.uid, 'token': self.token}))
         self.assertEqual(response.status_code, 200)
         user = User.objects.get(pk=self.user.pk)
