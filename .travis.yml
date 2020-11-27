@@ -14,7 +14,7 @@ services:
   - postgresql
 
 script:
-  - ./manage.py test tests.apps --settings=pur_beurre.settings.test_settings
+  - manage.py test tests.apps --settings=pur_beurre.settings.test_settings
 
 # safelist
 branches:
