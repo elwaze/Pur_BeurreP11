@@ -58,23 +58,23 @@ class AccountTestCase(GeneralTestCase):
         self.assertIn(
             'Veuillez confirmer votre adresse email pour valider la création de votre compte Pur Beurre',
             self.selenium.page_source)
-        # # check the e-mail have been sent
-        # self.selenium.get('https://endtest.io/mailbox?email=created_connect@endtest-mail.io')
-        # print('in emailpage')
-        # self.assertIn('Pour confirmer la création de votre compte Pur Beurre, veuillez cliquer sur le lien suivant :',
-        #               self.selenium.page_source)
+        # check the e-mail have been sent
+        self.selenium.get('https://endtest.io/mailbox?email=created_connect@endtest-mail.io')
+        print('in emailpage')
+        self.assertIn('Pour confirmer la création de votre compte Pur Beurre, veuillez cliquer sur le lien suivant :',
+                      self.selenium.page_source)
         # check that the activation link works
-        # confirm = self.selenium.find_element_name('confirm')
-        # confirm.click()
-        # # check the returned result
-        # self.assertEqual(
-        #     self.selenium.current_url,
-        #     '{}/user/my_account'.format(self.live_server_url),
-        #     "urlfound: " + self.selenium.current_url
-        # )
-        # # logout at the end of the test, not to be logged in for next test
-        # logout = self.selenium.find_element_by_xpath('//a[@href="/user/disconnection"]')
-        # logout.click()
+        confirm = self.selenium.find_element_name('confirm')
+        confirm.click()
+        # check the returned result
+        self.assertEqual(
+            self.selenium.current_url,
+            '{}/user/my_account'.format(self.live_server_url),
+            "urlfound: " + self.selenium.current_url
+        )
+        # logout at the end of the test, not to be logged in for next test
+        logout = self.selenium.find_element_by_xpath('//a[@href="/user/disconnection"]')
+        logout.click()
 
     def test_create_account_diff_pwd(self):
         """
