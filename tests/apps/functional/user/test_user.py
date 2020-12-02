@@ -3,6 +3,9 @@ from tests.apps.functional.func_tests import PASSWORD
 from tests.apps.functional.func_tests import FIRST_NAME
 from tests.apps.functional.func_tests import GeneralTestCase
 
+from django.core import mail
+import re
+
 
 class AccountTestCase(GeneralTestCase):
     login_required = False
@@ -44,9 +47,9 @@ class AccountTestCase(GeneralTestCase):
         Tests the user account creation with a valid form.
         """
         username, password, pwd_confirm, first_name, submit = self.account_basis(self.create_url)
-
+        # self.created_user.is_active = False
         # Fill the form with data
-        username.send_keys('created_{}'.format(USERNAME))
+        username.send_keys('created.{}'.format(USERNAME))
         password.send_keys('created_{}'.format(PASSWORD))
         pwd_confirm.send_keys('created_{}'.format(PASSWORD))
         first_name.send_keys('createaccount')
@@ -59,21 +62,17 @@ class AccountTestCase(GeneralTestCase):
             'Veuillez confirmer votre adresse email pour valider la création de votre compte Pur Beurre',
             self.selenium.page_source)
         # check the e-mail have been sent
-        self.selenium.get('http://127.0.0.1:1080/')
-        self.assertIn('Pour confirmer la création de votre compte Pur Beurre, veuillez cliquer sur le lien suivant :',
-                      self.selenium.page_source)
+        self.assertEqual(len(mail.outbox), 1)
+
+        # check the email content
+        self.assertEqual(mail.outbox[0].subject, 'Finalisez la création de votre compte Pur Beurre')
+        self.assertEqual(mail.outbox[0].recipients()[0], 'created.{}'.format(USERNAME))
+        self.assertIn('Pour confirmer la création de votre compte Pur Beurre, veuillez cliquer sur le lien suivant :', mail.outbox[0].body)
+
         # check that the activation link works
-        confirm = self.selenium.find_element_name('confirm')
-        confirm.click()
-        # check the returned result
-        self.assertEqual(
-            self.selenium.current_url,
-            '{}/user/my_account'.format(self.live_server_url),
-            "urlfound: " + self.selenium.current_url
-        )
-        # logout at the end of the test, not to be logged in for next test
-        logout = self.selenium.find_element_by_xpath('//a[@href="/user/disconnection"]')
-        logout.click()
+        link = re.split(r'href="', mail.outbox[0].body)[1]
+        link = re.split(r'">Je', link)[0]
+        self.assertIn('/user/activate/', link)
 
     def test_create_account_diff_pwd(self):
         """
