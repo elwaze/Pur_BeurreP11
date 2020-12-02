@@ -53,8 +53,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'pur_beurre.urls'
-EMAIL_HOST = '127.0.0.1'
-EMAIL_PORT = 1025
+# EMAIL_HOST = '127.0.0.1'
+# EMAIL_PORT = 1025
 
 TEMPLATES = [
     {
