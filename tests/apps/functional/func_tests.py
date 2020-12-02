@@ -16,7 +16,7 @@ from apps.off.models import Product
 
 PASSWORD = 'connection'
 FIRST_NAME = 'Selenium'
-USERNAME = 'connect@endtest-mail.io'
+USERNAME = 'selenium@endtest-mail.io'
 
 
 class GeneralTestCase(LiveServerTestCase):

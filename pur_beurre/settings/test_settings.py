@@ -54,6 +54,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'pur_beurre.urls'
+
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'pur.beurre.oc@gmail.com'

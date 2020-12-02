@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-# from apps.user.models import PBUser as User
 from django.contrib.auth.models import User
 from .forms import ConnectionForm, AccountForm
 from .tokens import account_activation_token
@@ -65,7 +64,6 @@ def create_account(request):
     if request.method == "POST":
         form = AccountForm(request.POST)
         if form.is_valid():
-            print('form is valid')
             # checking form data
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password"]
@@ -77,46 +75,33 @@ def create_account(request):
             user.save()
             # sending confirmation email
             subject = 'Finalisez la création de votre compte Pur Beurre'
-            print(subject)
-            user = user
-            print(user.is_active)
-            domain = settings.SITE_LINK
-            print(domain)
-            uid = urlsafe_base64_encode(force_bytes(user.pk))
-            print(uid)
-            token = account_activation_token.make_token(user)
-            print(token)
             context = {
                 'user': user,
-                'domain': domain,
+                'domain': settings.SITE_LINK,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user)
                 }
-            print(context)
             email_content = render_to_string('confirmation_email.html', context)
             to_email = form.cleaned_data.get("username")
-            print(email_content)
             email = EmailMessage(
                 subject, email_content, to=[to_email]
             )
-            print(email)
             response = email.send()
-            print("email sent")
-            print(response)
             return HttpResponse(
                 'Veuillez confirmer votre adresse email pour valider la création de votre compte Pur Beurre')
 
         else:
             error = True
-            print('error')
     else:
-        print("return to accountform")
         form = AccountForm()
-    print('coucou')
     return render(request, 'create_account.html', locals())
 
 
 def activate(request, uidb64, token):
+    """
+    sets the user.is_active to true if the token is valid,
+    login the user, redirects to the my_account page.
+    """
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
