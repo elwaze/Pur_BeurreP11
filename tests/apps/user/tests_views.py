@@ -73,18 +73,9 @@ class TestUserViews(TestCase):
         calling activate should return a http code = 302.
         after that, the user should be activated.
         """
-        # user = User.objects.get(pk=self.user.pk)
-        # # setting is_active to False, to test it has been activated after calling activate page
-        # user.is_active = False
-        # user.save()
-        # print("user.is_active 1")
-        # print(user.is_active)
         response = self.client.get(reverse('activate', kwargs={'uidb64': self.uid, 'token': self.token}))
-        self.assertEqual(response.status_code, 200)
-        user = User.objects.get(pk=self.user.pk)
-        # print("user")
-        # print(user)
-        # print("user.is_active 2")
-        # print(user.is_active)
-        self.assertEqual(self.user.is_active, True)
+        self.assertEqual(response.status_code, 302)
+        user = User.\
+            objects.get(pk=self.user.pk)
+        self.assertEqual(user.is_active, True)
         self.assertTemplateUsed(template_name='purbeurre_user/my_account.html')

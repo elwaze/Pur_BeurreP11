@@ -90,24 +90,9 @@ def create_account(request):
             email.send()
             return HttpResponse(
                 'Veuillez confirmer votre adresse email pour valider la création de votre compte Pur Beurre')
-            # sendConfirm(user)
 
-            # try:
-            #     user.save()
-            # except Exception:
-            #     return render() # error ?? error = True ?
-            # sending confirmation email
-            # sendConfirm(user)
-            # if user:
-            #     # Connecting user and redirecting to the user's account page.
-            #     login(request, user)
-            #     return redirect('my_account')
-            # # prompts an error
-            # else:
-            #     error = True
         else:
             error = True
-            # print("error")
     else:
         form = AccountForm()
 
@@ -118,34 +103,13 @@ def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
-        print("user (try) : ")
-        print(user.is_active)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-    print("token")
-    print(token)
+
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        print("user.is_active in user is not none etc : ")
-        print(user.is_active)
         login(request, user)
         return redirect('my_account')
-        # return HttpResponse(
-        #     'L\'activation de votre compte Pur Beurre a été réalisée. vous pouvez maintenant vous connecter.')
     else:
         return HttpResponse('Le lien d\'activation est invalide, veuillez réessayer !')
-
-# def user_confirmation(request):
-#     token = request.GET.get('token')
-#     if not token:
-#         # error renv une p html disant qu'une erreur s'est produite, qu'il faut recommencer ? lien vers create account
-#         return
-#     users = User.objects.filter(token=token, active=False)
-#     if not users:
-#         # error renv une p html disant que la confirmation n'a pas pu avoir lieu, qu'il faut recommencer ?
-#         return render()
-#     for user in users:
-#         user.active = True
-#         user.save()
-#     return redirect('connection')
