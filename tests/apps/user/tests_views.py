@@ -21,7 +21,7 @@ class TestUserViews(TestCase):
         self.client = Client()
         self.user = User.objects.create_user(username=self.username, password=self.password)
         self.user.firstname = self.firstname
-        self.user.is_active = True
+        self.user.is_active = False
         self.user.save()
         self.token = account_activation_token.make_token(self.user)
         self.uid = urlsafe_base64_encode(force_bytes(self.user.pk))
@@ -86,5 +86,5 @@ class TestUserViews(TestCase):
         print(user)
         print("user.is_active 2")
         print(user.is_active)
-        # self.assertEqual(self.user.is_active, True)
+        self.assertEqual(self.user.is_active, True)
         self.assertTemplateUsed(template_name='purbeurre_user/my_account.html')
