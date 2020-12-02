@@ -1,6 +1,7 @@
 django
 psycopg2
 dj_database_url
+django-email-verification
 requests
 coverage
 selenium

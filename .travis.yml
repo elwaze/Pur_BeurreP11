@@ -4,6 +4,8 @@ python:
 
 before_script:
   - pip install -r requirements.txt
+  - gem install mailcatcher
+  - mailcatcher
   - coverage erase
 
 env: DJANGO_SETTINGS_MODULE="pur_beurre.settings.test_settings"

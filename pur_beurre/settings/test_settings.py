@@ -25,6 +25,7 @@ SECRET_KEY = '-()loz!vvo4&z_#ke3ipzj)%sk5*fn33h!unzt8^z00k9*xqwr'
 DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+SITE_LINK = 'http://127.0.0.1:8000'
 
 # Application definition
 
@@ -53,6 +54,17 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'pur_beurre.urls'
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'pur.beurre.oc@gmail.com'
+EMAIL_HOST_PASSWORD = 'ocPurBeurre!'
+EMAIL_PORT = 587
+# EMAIL_HOST = 'localhost'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_PORT = 1025
+# EMAIL_USE_TLS = False
 
 TEMPLATES = [
     {

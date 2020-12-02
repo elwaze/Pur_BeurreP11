@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>e-mail confirmation</title>
+</head>
+<body>
+    <h1>Bonjour {{user.first_name}} !</h1><br>
+    <p>Pour confirmer la création de votre compte Pur Beurre, veuillez cliquer sur le lien suivant : </p><br>
+    <p><a name="confirm" href="{{ domain }}{% url 'activate' uidb64=uid token=token %}">Je confirme mon inscription</a></p>
+</body>
+</html>

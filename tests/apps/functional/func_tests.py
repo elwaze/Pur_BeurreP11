@@ -4,6 +4,7 @@ import json
 from tests import TESTS_ROOT
 
 from django.test import LiveServerTestCase
+# from apps.user.models import PBUser as User
 from django.contrib.auth.models import User
 
 from selenium import webdriver
@@ -15,7 +16,7 @@ from apps.off.models import Product
 
 PASSWORD = 'connection'
 FIRST_NAME = 'Selenium'
-USERNAME = 'connection@selenium.com'
+USERNAME = 'selenium@endtest-mail.io'
 
 
 class GeneralTestCase(LiveServerTestCase):
