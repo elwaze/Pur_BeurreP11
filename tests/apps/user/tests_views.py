@@ -75,7 +75,6 @@ class TestUserViews(TestCase):
         """
         response = self.client.get(reverse('activate', kwargs={'uidb64': self.uid, 'token': self.token}))
         self.assertEqual(response.status_code, 302)
-        user = User.\
-            objects.get(pk=self.user.pk)
+        user = User.objects.get(pk=self.user.pk)
         self.assertEqual(user.is_active, True)
         self.assertTemplateUsed(template_name='purbeurre_user/my_account.html')
