@@ -28,24 +28,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-# AUTH_USER_MODEL = 'user.PBUser'
-
 # email confirmation settings
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'pur.beurre.oc@gmail.com'
 EMAIL_HOST_PASSWORD = 'ocPurBeurre!'
 EMAIL_PORT = 587
-# EMAIL_ACTIVE_FIELD = 'is_active'
-# EMAIL_SERVER = 'smtp.gmail.com'
-# EMAIL_PORT = 587
-# EMAIL_ADDRESS = 'pur.beurre.oc@gmail.com'
-# EMAIL_FROM_ADDRESS = 'confirmation@PurBeurre.com'
-# EMAIL_PASSWORD = 'ocPurBeurre!' # os.environ['password_key'] suggested
-# EMAIL_MAIL_SUBJECT = 'Confirm your email'
-# EMAIL_MAIL_HTML = 'confirmation_email.html'
-# # EMAIL_MAIL_PLAIN = 'mail_body.txt'
-# # EMAIL_PAGE_TEMPLATE = 'confirm_template.html'
 
 SITE_LINK = 'http://127.0.0.1:8000'
 

@@ -2,7 +2,6 @@ from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from apps.user.tokens import account_activation_token
 
-# from apps.user.models import PBUser as User
 from django.urls import reverse
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
