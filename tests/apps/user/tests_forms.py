@@ -1,4 +1,3 @@
-# from apps.user.models import PBUser as User
 from django.contrib.auth.models import User
 
 from django.core.exceptions import ValidationError

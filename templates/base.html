@@ -47,7 +47,7 @@
                             </form>
                         </li>
                         <li class="nav-item">
-                            {% if user.is_authenticated %}
+                            {% if user.is_authenticated and user.is_active%}
                             <a class="nav-link js-scroll-trigger" href="{% url 'my_account' %}">
                                 <i class="far fa-user fa-3x"></i>
                             </a>
@@ -57,7 +57,7 @@
                             </a>
                             {% endif %}
                         </li>
-                        {% if user.is_authenticated %}
+                        {% if user.is_authenticated and user.is_active%}
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="{% url 'favorites' %}">
                                 <img src="{% static 'img/logo-favorites.png' %}" alt="Mes aliments" id="favorites" width="29px">

@@ -87,8 +87,9 @@ def create_account(request):
                 subject, email_content, to=[to_email]
             )
             response = email.send()
-            return HttpResponse(
-                'Veuillez confirmer votre adresse email pour valider la création de votre compte Pur Beurre')
+            activation = 'Veuillez confirmer votre adresse email pour valider la création de votre compte Pur Beurre'
+
+            return render(request, 'create_account.html', locals())
 
         else:
             error = True
